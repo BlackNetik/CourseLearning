@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseLearning"
         mc:Ignorable="d"
-        Title="RegistrationWindow" Height="450" Width="800" WindowStyle="ToolWindow">
+        Height="450" Width="800" WindowStyle="ToolWindow" Background="AliceBlue">
     <Grid>
         
     </Grid>
