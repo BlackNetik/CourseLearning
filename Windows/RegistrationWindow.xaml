@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseLearning"
         mc:Ignorable="d"
-        Height="450" Width="800" WindowStyle="ToolWindow" Background="AliceBlue">
+        MinHeight="500" MinWidth="600" Height="500" Width="600" WindowStyle="ToolWindow" Background="AliceBlue">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Окно регистрации" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Margin="0 20" />
+
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="50" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right" >
+                <TextBlock Text="Имя: " VerticalAlignment="Center" Margin="0 0 10 0" FontSize="18" Width="200" TextAlignment="Center" />
+                <TextBox FontSize="16" Width="180" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right" >
+                <TextBlock Text="Фамилия: " VerticalAlignment="Center" Margin="0 0 10 0" FontSize="18" Width="200" TextAlignment="Center"/>
+                <TextBox FontSize="16" Width="180"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
+                <TextBlock Text="Логин: " VerticalAlignment="Center" Margin="0 0 10 0" FontSize="18" Width="200" TextAlignment="Center" />
+                <TextBox FontSize="16" Width="180" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10" HorizontalAlignment="Right">
+                <TextBlock Text="Пароль: " VerticalAlignment="Center" Margin="0 0 10 0" FontSize="18" Width="200" TextAlignment="Center" />
+                <TextBox FontSize="16" Width="180" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10" >
+                <TextBlock Text="Подтверждение пароля: " VerticalAlignment="Center" Margin="0 0 10 0" FontSize="18" />
+                <TextBox FontSize="16" Width="180" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20">
+            <Button x:Name="registerNewAccountButton" Content="Зарегистрироваться" Margin="0 0 10 0" Background="White" 
+                    Click="registerNewAccountButton_Click" FontSize="18" Width="200" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Button x:Name="cancelButton" Content="Отмена" Background="White" Click="cancelButton_Click" FontSize="18" Width="80"/>
+        </StackPanel>
     </Grid>
 </Window>

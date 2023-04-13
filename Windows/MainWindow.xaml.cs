@@ -32,7 +32,7 @@ namespace CourseLearning
 
         private void registrationButton_Click(object sender, RoutedEventArgs e)
         {
-            RegistrationWindow registrationWindow = new RegistrationWindow();
+            RegistrationWindow registrationWindow = new RegistrationWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
             this.Close();
             registrationWindow.Show();
         }

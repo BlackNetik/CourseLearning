@@ -23,5 +23,17 @@ namespace CourseLearning
         {
             InitializeComponent();
         }
+
+        private void registerNewAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainWindow= new MainWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
+            this.Close();
+            mainWindow.Show();
+        }
     }
 }
