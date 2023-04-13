@@ -24,5 +24,17 @@ namespace CourseLearning
         {
             InitializeComponent();
         }
+
+        private void joinButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void registrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegistrationWindow registrationWindow = new RegistrationWindow();
+            this.Close();
+            registrationWindow.Show();
+        }
     }
 }
