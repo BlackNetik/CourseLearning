@@ -58,8 +58,18 @@ namespace CourseLearning
 
             // execute command
             cmd.ExecuteNonQuery();
+            //Сообщение об успешном добавлении и очистка полей
+            MessageBox.Show("Пользователь успешно добавлен!");
+            clearAll();
 
+        }
 
+        private void clearAll()
+        {
+            usernameUserReg.Text = "";
+            passwordUserReg.Text = "";
+            firstNameUser.Text = "";
+            lastNameUser.Text = "";
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
