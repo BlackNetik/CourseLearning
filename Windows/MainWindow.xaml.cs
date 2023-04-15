@@ -34,30 +34,26 @@ namespace CourseLearning
 
         private void joinButton_Click(object sender, RoutedEventArgs e)
         {
-            //TestConnection();
-            
-            var conn = new NpgsqlConnection(ConnectionToBD);
+            //Подключение к базе данных
+            var conn = GetConnection();
             conn.Open();
             var cmd = new NpgsqlCommand();
             cmd.Connection = conn;
 
+            //Отправка запроса на поиск пользователя в базе данных
             cmd.CommandText = "SELECT id, username, password, first_name, last_name " +
                               "FROM Users " +
                               $"WHERE username = @username AND password = @password";
 
-
+            //Добавление сторонних данных в запрос
             cmd.Parameters.AddWithValue("username", loginTextBox.Text);
             cmd.Parameters.AddWithValue("password", passwordPasswordBox.Password.ToString());
-
-
-            //var reader = cmd.ExecuteScalar().ToString();
-            //MessageBox.Show(reader);
 
             var reader = cmd.ExecuteReader();
             if (reader.Read())
             {
-                
-                
+
+                //Создание экземпляра пользователя для дальнейшего использования в программе
                 var user = new User
                 {
                     Id = reader.GetInt32(0),
@@ -66,7 +62,7 @@ namespace CourseLearning
                     FirstName = reader.GetString(3),
                     LastName = reader.GetString(4)
                 };
-                MessageBox.Show(user.Username.ToString());
+                MessageBox.Show(user.Username.ToString() + " — Существующий пользовательский логин");
                 //return user;
 
             }
@@ -77,6 +73,7 @@ namespace CourseLearning
             
         }
 
+        //Функция, используемая для перехода на окно регистрации
         private void registrationButton_Click(object sender, RoutedEventArgs e)
         {
             RegistrationWindow registrationWindow = new RegistrationWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
@@ -84,7 +81,8 @@ namespace CourseLearning
             registrationWindow.Show();
         }
 
-        private static NpgsqlConnection GetConnection()
+        //Функция, возвращающая подключение к БД
+        public static NpgsqlConnection GetConnection()
         {
             return new NpgsqlConnection("Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;");
         }
@@ -107,30 +105,16 @@ namespace CourseLearning
                     if (result != null && result.Equals(1))
                     {
                         // Connection is successful
-                        //Console.WriteLine("Database connection successful!");
-                        MessageBox.Show("Отлично");
+                        MessageBox.Show("Database connection successful!");
                     }
                     else
                     {
                         // Connection failed
-                        //Console.WriteLine("Database connection failed!");
-                        MessageBox.Show("Ошибка");
+                        MessageBox.Show("Database connection failed!");
                     }
                 }
             }
-            /*
-            using (NpgsqlConnection connection = GetConnection())
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    MessageBox.Show("Connected");
-                }
-                else
-                {
-                    MessageBox.Show("Disconnected");
-                }
-            }
-            */
+            
 
         }
     }
