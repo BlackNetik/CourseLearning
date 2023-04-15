@@ -10,112 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using CourseLearning.Classes;
-using Npgsql;
 
-namespace CourseLearning
+namespace CourseLearning.Windows
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
-
-
         public MainWindow()
         {
             InitializeComponent();
-        }
-        
-
-
-        private void joinButton_Click(object sender, RoutedEventArgs e)
-        {
-            //Подключение к базе данных
-            var conn = GetConnection();
-            conn.Open();
-            var cmd = new NpgsqlCommand();
-            cmd.Connection = conn;
-
-            //Отправка запроса на поиск пользователя в базе данных
-            cmd.CommandText = "SELECT id, username, password, first_name, last_name " +
-                              "FROM Users " +
-                              $"WHERE username = @username AND password = @password";
-
-            //Добавление сторонних данных в запрос
-            cmd.Parameters.AddWithValue("username", loginTextBox.Text);
-            cmd.Parameters.AddWithValue("password", passwordPasswordBox.Password.ToString());
-
-            var reader = cmd.ExecuteReader();
-            if (reader.Read())
-            {
-
-                //Создание экземпляра пользователя для дальнейшего использования в программе
-                var user = new User
-                {
-                    Id = reader.GetInt32(0),
-                    Username = reader.GetString(1),
-                    Password = reader.GetString(2),
-                    FirstName = reader.GetString(3),
-                    LastName = reader.GetString(4)
-                };
-                MessageBox.Show(user.Username.ToString() + " — Существующий пользовательский логин");
-                //return user;
-
-            }
-            else
-            {
-                MessageBox.Show("Ошибка");
-            }
-            
-        }
-
-        //Функция, используемая для перехода на окно регистрации
-        private void registrationButton_Click(object sender, RoutedEventArgs e)
-        {
-            RegistrationWindow registrationWindow = new RegistrationWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
-            this.Close();
-            registrationWindow.Show();
-        }
-
-        //Функция, возвращающая подключение к БД
-        public static NpgsqlConnection GetConnection()
-        {
-            return new NpgsqlConnection("Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;");
-        }
-
-        private void TestConnection()
-        {
-            
-            using (var conn = new NpgsqlConnection(ConnectionToBD))
-            {
-                // Open the database connection
-                conn.Open();
-
-                // Create a new NpgsqlCommand object with your query and the NpgsqlConnection object
-                using (var cmd = new NpgsqlCommand("SELECT 1", conn))
-                {
-                    // Execute the query and store the result in a variable
-                    var result = cmd.ExecuteScalar();
-
-                    // Check if the result is not null and is equal to 1
-                    if (result != null && result.Equals(1))
-                    {
-                        // Connection is successful
-                        MessageBox.Show("Database connection successful!");
-                    }
-                    else
-                    {
-                        // Connection failed
-                        MessageBox.Show("Database connection failed!");
-                    }
-                }
-            }
-            
-
         }
     }
 }

@@ -42,7 +42,7 @@ namespace CourseLearning
             initializeUser();
 
             //Подключение к базе данных
-            var conn = MainWindow.GetConnection();
+            var conn = LoginWindow.GetConnection();
             conn.Open();
 
             //Проверка значений
@@ -86,7 +86,7 @@ namespace CourseLearning
 
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow mainWindow= new MainWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
+            LoginWindow mainWindow= new LoginWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
             this.Close();
             mainWindow.Show();
         }
