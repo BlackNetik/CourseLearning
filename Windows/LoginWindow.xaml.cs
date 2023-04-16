@@ -71,7 +71,6 @@ namespace CourseLearning
                 //return user;
 
                 //Переход на новое окно
-                //testSideBar();
                 changeToMainWindow();
 
             }
@@ -98,12 +97,6 @@ namespace CourseLearning
             mainWindow.Show();
         }
 
-        public void testSideBar()
-        {
-            SideBar sideBar = new SideBar();
-            this.Close();
-            sideBar.Show();
-        }
 
         //Функция, возвращающая подключение к БД
         public static NpgsqlConnection GetConnection()
