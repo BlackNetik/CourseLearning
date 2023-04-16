@@ -7,6 +7,20 @@
         mc:Ignorable="d"
         MinHeight="600" MinWidth="1000" Height="600" Width="1000" WindowStyle="ToolWindow" Background="AliceBlue">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <StackPanel Grid.Column="0" Background="#FF333333" VerticalAlignment="Stretch" Width="200">
+            <Button Content="Profile" Margin="10" />
+            <Button Content="Creating courses" Margin="10" />
+            <Button Content="Read courses" Margin="10" />
+            <Button Content="Logout" Margin="10" />
+        </StackPanel>
+
+        <!-- Frame to display content -->
+        <Frame Grid.Column="1" Margin="10" />
     </Grid>
 </Window>
