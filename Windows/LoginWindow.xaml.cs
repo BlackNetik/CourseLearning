@@ -71,8 +71,8 @@ namespace CourseLearning
                 //return user;
 
                 //Переход на новое окно
-                testSideBar();
-                //changeToMainWindow();
+                //testSideBar();
+                changeToMainWindow();
 
             }
             else
