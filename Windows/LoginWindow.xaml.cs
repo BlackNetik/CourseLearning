@@ -67,11 +67,12 @@ namespace CourseLearning
                     FirstName = reader.GetString(3),
                     LastName = reader.GetString(4)
                 };
-                MessageBox.Show(user.Username.ToString() + " — Существующий пользовательский логин");
+                //MessageBox.Show(user.Username.ToString() + " — Существующий пользовательский логин");
                 //return user;
 
                 //Переход на новое окно
-                changeToMainWindow();
+                testSideBar();
+                //changeToMainWindow();
 
             }
             else
@@ -95,6 +96,13 @@ namespace CourseLearning
             MainWindow mainWindow = new MainWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
             this.Close();
             mainWindow.Show();
+        }
+
+        public void testSideBar()
+        {
+            SideBar sideBar = new SideBar();
+            this.Close();
+            sideBar.Show();
         }
 
         //Функция, возвращающая подключение к БД
