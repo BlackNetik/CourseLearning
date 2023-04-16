@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseLearning.Windows"
         mc:Ignorable="d"
-        Title="SideBar" Height="600" Width="321" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}" Foreground="AliceBlue">
+        MaxHeight="600" MaxWidth="300" MinHeight="600" Width="300" WindowStartupLocation="CenterScreen" WindowStyle="None" Background="{x:Null}" Foreground="AliceBlue">
     <Grid>
         <Rectangle HorizontalAlignment="Center" Height="600" VerticalAlignment="Center" Width="315" Fill="LightSkyBlue" Stroke="AliceBlue"/>
         <Ellipse HorizontalAlignment="Left" Height="47" Margin="10,10,0,0" VerticalAlignment="Top" Width="47">
@@ -13,8 +13,8 @@
                 <ImageBrush ImageSource="/Images/icons8-profile.png" Stretch="Fill"/>
             </Ellipse.Fill>
         </Ellipse>
-        <TextBlock Margin="70,10,8,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Width="243" 
-                   TextAlignment="Center" FontWeight="Bold" FontSize="30" Text="Профиль"/>
+        <TextBlock Margin="68,20,22,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="24" 
+                   TextAlignment="Center" FontWeight="Bold" FontSize="20" Text="Профиль"/>
         <Ellipse HorizontalAlignment="Left" Height="47" Margin="10,87,0,0" VerticalAlignment="Top" Width="47" >
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Images/icons8-writing-48.png" Stretch="UniformToFill" TileMode="None" Opacity="1" >
@@ -29,8 +29,8 @@
                 </ImageBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <TextBlock Margin="68,87,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="47" Width="243" 
-            TextAlignment="Center" FontWeight="Bold" FontSize="26" Text="Создание курсов"/>
+        <TextBlock Margin="68,97,22,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="33" 
+            TextAlignment="Center" FontWeight="Bold" FontSize="20" Text="Создание курсов"/>
         <Ellipse HorizontalAlignment="Left" Height="47" Margin="10,164,0,0" VerticalAlignment="Top" Width="47">
             <Ellipse.Fill>
                 <ImageBrush ImageSource="/Images/icons8-courses-48.png" Stretch="UniformToFill" TileMode="None" Opacity="1">
@@ -45,7 +45,7 @@
                 </ImageBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <TextBlock Margin="70,172,8,0" VerticalAlignment="Top" Height="32" Width="243" 
+        <TextBlock Margin="68,172,10,0" VerticalAlignment="Top" Height="32" 
             TextAlignment="Center" FontWeight="Bold" FontSize="20" Text="Прохождение курсов" TextWrapping="Wrap"/>
         <Ellipse HorizontalAlignment="Left" Height="47" Margin="10,0,0,16" VerticalAlignment="Bottom" Width="47">
             <Ellipse.Fill>
@@ -61,7 +61,7 @@
                 </ImageBrush>
             </Ellipse.Fill>
         </Ellipse>
-        <TextBlock Margin="68,0,10,24" VerticalAlignment="Bottom" Height="32" Width="243" 
+        <TextBlock Margin="68,0,10,24" VerticalAlignment="Bottom" Height="32" 
             TextAlignment="Center" FontWeight="Bold" FontSize="20" Text="Выход" TextWrapping="Wrap"/>
 
     </Grid>
