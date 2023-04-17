@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CourseLearning.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,32 @@ namespace CourseLearning.Windows
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void sideBarProfile_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate to the profile page
+            contentFrame.Navigate(new ProfilePage());
+        }
+
+        private void sideBarCreatingCourses_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate to the creating courses page
+            contentFrame.Navigate(new CreatingCoursesPage());
+        }
+
+        private void sideBarReadingCourses_Click(object sender, RoutedEventArgs e)
+        {
+            // Navigate to the read courses page
+            contentFrame.Navigate(new ReadingCoursesPage());
+        }
+
+        //Выход из профиля
+        private void sideBarLogout_Click(object sender, RoutedEventArgs e)
+        {
+            LoginWindow mainWindow = new LoginWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
+            this.Close();
+            mainWindow.Show();
         }
     }
 }

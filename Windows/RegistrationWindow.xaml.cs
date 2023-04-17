@@ -73,6 +73,7 @@ namespace CourseLearning
 
         }
 
+        //Функция очистки полей
         private void clearAll()
         {
             usernameUserReg.Text = "";
@@ -82,9 +83,11 @@ namespace CourseLearning
             lastNameUser.Text = "";
         }
 
+        //Функция проверки паролей
         private bool checkPassword(string firstpassword, string secondpassword) => firstpassword == secondpassword;
 
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        //Функция, перенапрявляющяя на окно авторизации после нажатия на отмену
+        public void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             LoginWindow mainWindow= new LoginWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
             this.Close();
