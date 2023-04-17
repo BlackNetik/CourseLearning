@@ -50,7 +50,7 @@ namespace CourseLearning.Pages
                         cmd.Connection = conn;
                         cmd.CommandText = "SELECT course_name, progress, status_course FROM CourseProgress WHERE id_user = @userId";
                         cmd.Parameters.AddWithValue("userId", ProfileUser.Id);
-
+                        //По какой-то причине не выводит полученную информацию
                         using (var reader = cmd.ExecuteReader())
                         {
                             DataTable dt = new DataTable();
