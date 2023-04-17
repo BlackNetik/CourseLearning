@@ -67,11 +67,12 @@ namespace CourseLearning
                     FirstName = reader.GetString(3),
                     LastName = reader.GetString(4)
                 };
+
                 //MessageBox.Show(user.Username.ToString() + " — Существующий пользовательский логин");
                 //return user;
 
                 //Переход на новое окно
-                changeToMainWindow();
+                changeToMainWindow(user);
 
             }
             else
@@ -90,12 +91,13 @@ namespace CourseLearning
         }
 
         //Функция, используемая для перехода на основное окно после авторизации или регистрации
-        public void changeToMainWindow()
+        public void changeToMainWindow(User transferUser)
         {
-            MainWindow mainWindow = new MainWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
+            MainWindow mainWindow = new MainWindow(transferUser) { WindowStartupLocation = WindowStartupLocation.CenterScreen };
             this.Close();
             mainWindow.Show();
         }
+
 
 
         //Функция, возвращающая подключение к БД

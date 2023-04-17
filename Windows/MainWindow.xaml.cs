@@ -1,4 +1,5 @@
-﻿using CourseLearning.Pages;
+﻿using CourseLearning.Classes;
+using CourseLearning.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +21,23 @@ namespace CourseLearning.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
+        User ProfileUser { get; set; }
+        public MainWindow(User user)
         {
             InitializeComponent();
+
+            //Инициализация пользователя
+            ProfileUser = user;
+
+            // Navigate to the profile page
+            contentFrame.Navigate(new ProfilePage(ProfileUser));
         }
 
         private void sideBarProfile_Click(object sender, RoutedEventArgs e)
         {
             // Navigate to the profile page
-            contentFrame.Navigate(new ProfilePage());
+            contentFrame.Navigate(new ProfilePage(ProfileUser));
         }
 
         private void sideBarCreatingCourses_Click(object sender, RoutedEventArgs e)
