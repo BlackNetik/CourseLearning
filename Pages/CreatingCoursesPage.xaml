@@ -6,9 +6,43 @@
       xmlns:local="clr-namespace:CourseLearning.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CreatingCoursesPage" Background="Red">
+      Title="CreatingCoursesPage" Background="AliceBlue">
 
-    <Grid>
-        
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel>
+        <!-- Course page number -->
+        <TextBlock x:Name="PageNumber" Text="Page 1" FontSize="16" Margin="20" />
+
+        <!-- Page header -->
+        <TextBox x:Name="PageHeader" Text="Introduction to Computer Science" FontSize="24" Margin="20,10" />
+
+        <!-- Page text (scrolling) -->
+        <ScrollViewer Margin="20,10">
+            <TextBox x:Name="PageText" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="300" />
+        </ScrollViewer>
+
+            <!-- Standardized test question -->
+            <StackPanel Margin="20,10">
+                <TextBlock Text="Standardized Test Question:" FontWeight="Bold" />
+                <TextBox x:Name="TestQuestion" TextWrapping="Wrap" Margin="0,5" />
+                <TextBox x:Name="AnswerOption1" TextWrapping="Wrap" Margin="0,5" />
+                <TextBox x:Name="AnswerOption2" TextWrapping="Wrap" Margin="0,5" />
+                <TextBox x:Name="AnswerOption3" TextWrapping="Wrap" Margin="0,5" />
+                <TextBox x:Name="AnswerOption4" TextWrapping="Wrap" Margin="0,5" />
+                <ComboBox x:Name="CorrectAnswer" Margin="0,5" SelectedIndex="0">
+                    <ComboBoxItem Content="1" />
+                    <ComboBoxItem Content="2" />
+                    <ComboBoxItem Content="3" />
+                    <ComboBoxItem Content="4" />
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Regular question with written answer -->
+            <StackPanel Margin="20,10">
+                <TextBlock Text="Regular Question:" FontWeight="Bold" />
+                <TextBox x:Name="RegularQuestion" TextWrapping="Wrap" Margin="0,5" />
+                <TextBox x:Name="CorrectAnswerText" TextWrapping="Wrap" Margin="0,5" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
