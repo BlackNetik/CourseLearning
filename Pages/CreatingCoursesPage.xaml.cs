@@ -46,10 +46,10 @@ namespace CourseLearning.Pages
             pageObject.page_number = pageNumber;
 
             // Extract header
-            pageObject.header = PageHeader.Text.ToString();
+            pageObject.header = PageHeader.Text;
 
             // Extract text
-            pageObject.text = PageText.Text.ToString();
+            pageObject.text = PageText.Text;
 
             // Extract standardized test
             TestObject testObject = new TestObject();
@@ -88,7 +88,35 @@ namespace CourseLearning.Pages
 
         private void NextPageCreating_Click(object sender, RoutedEventArgs e)
         {
+            //Добавление объекта в список объектов
+            PageObject result = ExtractPageObjectFromMarkup();
+            pageObjects.Add(result);
 
+            //Очистка значений в разметке
+            ClearTextBoxes();
+
+            //Запись новой страницы
+            string pageNumberText = PageNumber.Text;
+            string[] pageNumberParts = pageNumberText.Split(':');
+            int pageNumber = int.Parse(pageNumberParts[1].Trim());
+            PageNumber.Text = $"Страница: {pageNumber+=1}";
+
+
+        }
+
+        //Функция, которая очищает значения полей разметки
+        private void ClearTextBoxes()
+        {
+            PageHeader.Text = "";
+            PageText.Text = "";
+            TestQuestion.Text = "";
+            AnswerOption1.Text = "";
+            AnswerOption2.Text = "";
+            AnswerOption3.Text = "";
+            AnswerOption4.Text = "";
+            CorrectAnswer.SelectedIndex = 0;
+            RegularQuestion.Text = "";
+            CorrectAnswerText.Text = "";
         }
 
         //Функция для добавления нового нового объекта в список страниц. Пока оставлю, возможно потом пригодиться
