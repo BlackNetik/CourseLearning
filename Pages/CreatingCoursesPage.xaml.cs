@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using System.IO;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace CourseLearning.Pages
 {
@@ -24,25 +28,12 @@ namespace CourseLearning.Pages
     {
         //Лист страниц, необходимый для дальнейшего сохранения в JSON файле
         List<PageObject> pageObjects = new List<PageObject>();
+
         public CreatingCoursesPage()
         {
             InitializeComponent();
         }
 
-
-        //Функция для добавления нового нового объекта в список страниц
-        public void AddPageObject(int pageNumber, string header, string text, TestObject testObject, string question, string correctAnswer)
-        {
-            PageObject newPage = new PageObject();
-            newPage.page_number = pageNumber;
-            newPage.header = header;
-            newPage.text = text;
-            newPage.standardized_test = testObject;
-            newPage.question = question;
-            newPage.correct_answer = correctAnswer;
-
-            pageObjects.Add(newPage);
-        }
 
         private PageObject ExtractPageObjectFromMarkup()
         {
@@ -55,10 +46,10 @@ namespace CourseLearning.Pages
             pageObject.page_number = pageNumber;
 
             // Extract header
-            pageObject.header = PageHeader.Text;
+            pageObject.header = PageHeader.Text.ToString();
 
             // Extract text
-            pageObject.text = PageText.Text;
+            pageObject.text = PageText.Text.ToString();
 
             // Extract standardized test
             TestObject testObject = new TestObject();
@@ -83,14 +74,37 @@ namespace CourseLearning.Pages
 
         private void SaveButtonCreating_Click(object sender, RoutedEventArgs e)
         {
-            //Тестирование
+            //Добавление объекта в список объектов
             PageObject result = ExtractPageObjectFromMarkup();
-            MessageBox.Show($"{result.text}, {result.standardized_test.correct_answer}");
+            pageObjects.Add(result);
+
+            // Serialize the modified list of PageObject objects back into a JSON string
+            string newJsonString = JsonSerializer.Serialize(pageObjects, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic) });
+
+            // Write the new JSON string back to the file, overwriting the existing data
+            File.WriteAllText("example.json", newJsonString);
+
         }
 
         private void NextPageCreating_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        //Функция для добавления нового нового объекта в список страниц. Пока оставлю, возможно потом пригодиться
+        /*
+        public void AddPageObject(int pageNumber, string header, string text, TestObject testObject, string question, string correctAnswer)
+        {
+            PageObject newPage = new PageObject();
+            newPage.page_number = pageNumber;
+            newPage.header = header;
+            newPage.text = text;
+            newPage.standardized_test = testObject;
+            newPage.question = question;
+            newPage.correct_answer = correctAnswer;
+
+            pageObjects.Add(newPage);
+        }
+        */
     }
 }
