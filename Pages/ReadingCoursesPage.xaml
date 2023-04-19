@@ -6,9 +6,35 @@
       xmlns:local="clr-namespace:CourseLearning.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="ReadingCoursesPage" Background="Green">
+      Title="ReadingCoursesPage" Background="AliceBlue">
 
     <Grid>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- Отображение заголовка страницы -->
+                <TextBlock Text="{Binding Path=header}" FontSize="20" Margin="10" />
+
+                <!-- Отображение текста страницы -->
+                <TextBox Text="{Binding Path=text}" Margin="10" />
+
+                <!-- Отображение вопроса теста -->
+                <TextBlock Text="{Binding Path=standardized_test.question}" Margin="10" />
+
+                <!-- Отображение вариантов ответа на тест -->
+                <StackPanel Margin="10">
+                    <RadioButton Content="{Binding Path=standardized_test.answer_options[0]}" GroupName="Answers" />
+                    <RadioButton Content="{Binding Path=standardized_test.answer_options[1]}" GroupName="Answers" />
+                    <RadioButton Content="{Binding Path=standardized_test.answer_options[2]}" GroupName="Answers" />
+                    <RadioButton Content="{Binding Path=standardized_test.answer_options[3]}" GroupName="Answers" />
+                </StackPanel>
+
+                <!-- Ввод предполагаемого ответа -->
+                <TextBox x:Name="answer" Margin="10" />
+
+                <!-- Кнопка перехода на следующую страницу -->
+                <Button x:Name="NextPageReadingCoursesButton" Content="Следующая страница" Click="NextPageReadingCoursesButton_Click" Margin="10" />
+
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

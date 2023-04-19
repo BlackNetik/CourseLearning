@@ -24,5 +24,10 @@ namespace CourseLearning.Pages
         {
             InitializeComponent();
         }
+
+        private void NextPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
