@@ -84,6 +84,7 @@ namespace CourseLearning.Pages
             // Write the new JSON string back to the file, overwriting the existing data
             File.WriteAllText("example.json", newJsonString);
 
+            MessageBox.Show("Курс сохранен!");
         }
 
         private void NextPageCreating_Click(object sender, RoutedEventArgs e)
@@ -119,20 +120,5 @@ namespace CourseLearning.Pages
             CorrectAnswerText.Text = "";
         }
 
-        //Функция для добавления нового нового объекта в список страниц. Пока оставлю, возможно потом пригодиться
-        /*
-        public void AddPageObject(int pageNumber, string header, string text, TestObject testObject, string question, string correctAnswer)
-        {
-            PageObject newPage = new PageObject();
-            newPage.page_number = pageNumber;
-            newPage.header = header;
-            newPage.text = text;
-            newPage.standardized_test = testObject;
-            newPage.question = question;
-            newPage.correct_answer = correctAnswer;
-
-            pageObjects.Add(newPage);
-        }
-        */
     }
 }
