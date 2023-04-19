@@ -70,6 +70,27 @@
                 <TextBlock Text="Корректный письменный ответ к вопросу: "/>
                 <TextBox x:Name="CorrectAnswerText" TextWrapping="Wrap" Margin="0,5" />
             </StackPanel>
+
+            <StackPanel  Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                <!-- Кнопка сохранения курса -->
+                <Button x:Name="SaveButtonCreating" Content="Сохранить курс" 
+                        Background="White" FontSize="14" Margin="0 0 10 0" Click="SaveButtonCreating_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"></Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <!-- Кнопка перехода на новую страницу курса -->
+                <Button x:Name="NextPageCreating" Content="Перейти на следующую страницу" 
+                        Margin="10 0 0 0" Background="White" FontSize="14" Click="NextPageCreating_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="2"></Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
         </StackPanel>
     </ScrollViewer>
 </Page>
