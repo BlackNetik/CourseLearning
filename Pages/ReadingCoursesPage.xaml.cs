@@ -42,6 +42,9 @@ namespace CourseLearning.Pages
         {
             iterator++;
             FillPageObjectsReading(pageObjects, iterator);
+
+            CheckStandartQuestionReading(pageObjects[iterator]);
+            CheckTestPageReading(pageObjects[iterator]);
         }
 
         private void FindFileButton_Click(object sender, RoutedEventArgs e)
@@ -71,6 +74,9 @@ namespace CourseLearning.Pages
 
                 //Заполнение значений
                 FillPageObjectsReading(pageObjects, iterator);
+
+                CheckStandartQuestionReading(pageObjects[iterator]);
+                CheckTestPageReading(pageObjects[iterator]);
             }
 
 
@@ -94,9 +100,14 @@ namespace CourseLearning.Pages
             StandartQuestionReading.Text = pObjects[iterator].question;
 
             //Изменить потом условие if
-            if (pObjects[iterator].page_number== pObjects.Count)
+            if (CheckLastPage(pObjects, iterator))
             {
-                NextPageReadingCoursesButton.Content = "Проверить ответы";
+                NextPageReadingCoursesButton.Visibility = Visibility.Collapsed;
+                if (!CheckTestAndStandartQuestionReading(pObjects[iterator]))
+                {
+                    LastPageReadingCoursesButton.Visibility = Visibility.Visible;
+                }  
+
             }
             //StandartAnswerReading.Text = pObjects[iterator].correct_answer;
         }
@@ -137,5 +148,15 @@ namespace CourseLearning.Pages
             }
         }
 
+        //Функция, проверяющая на наличие теста или вопроса
+        public bool CheckTestAndStandartQuestionReading(PageObject pObject)
+        {
+            return pObject.question == "" || pObject.standardized_test.question == "";
+        }
+
+        private void LastPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

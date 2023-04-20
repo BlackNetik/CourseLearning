@@ -18,7 +18,7 @@
 
                 <!-- Page text (scrolling) -->
             <ScrollViewer Margin="20,10">
-                <TextBox x:Name="PageText" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="300" />
+                <TextBox x:Name="PageText" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="300"/>
         </ScrollViewer>
 
             <!-- Standardized test question -->

@@ -30,12 +30,12 @@
                 <TextBlock x:Name="HeaderPageReading" FontSize="20" Margin="10" />
 
                 <!-- Отображение текста страницы -->
-                <ScrollViewer Margin="10">
-                    <TextBlock x:Name="TextPageReading" Margin="10" />
-                </ScrollViewer>
-                
+                 <TextBlock x:Name="TextPageReading" Margin="10" TextWrapping="Wrap"
+               HorizontalAlignment="Stretch" TextAlignment="Left"/>
 
-                <!-- Отображение вопроса теста -->
+
+
+                        <!-- Отображение вопроса теста -->
                 <TextBlock x:Name="TestQuestionReading" Margin="10" />
 
                 <!-- Отображение вариантов ответа на тест -->
@@ -54,6 +54,10 @@
 
                 <!-- Кнопка перехода на следующую страницу -->
                 <Button x:Name="NextPageReadingCoursesButton" Content="Следующая страница" Click="NextPageReadingCoursesButton_Click" Margin="10" />
+                    
+                <!--Кнопка для последней страницы -->
+                    <Button x:Name="LastPageReadingCoursesButton" Content="Проверить ответы" Click="LastPageReadingCoursesButton_Click" 
+                           Visibility="Collapsed" Margin="10" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
