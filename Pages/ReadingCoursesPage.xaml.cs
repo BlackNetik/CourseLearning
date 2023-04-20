@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,10 +24,25 @@ namespace CourseLearning.Pages
         public ReadingCoursesPage()
         {
             InitializeComponent();
+
+            //Скрытые элементов отображения страницы
+            PageReadingLayout.Visibility = Visibility.Collapsed;
         }
 
         private void NextPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
         {
+
+        }
+
+        private void FindFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Json files (*.json)|*.json|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == true)
+            {
+                PageReadingLayout.Visibility = Visibility.Visible;
+                PageLoadingLayout.Visibility = Visibility.Collapsed;
+            }
 
         }
     }

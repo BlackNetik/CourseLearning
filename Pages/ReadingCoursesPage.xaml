@@ -11,6 +11,20 @@
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
             <StackPanel>
+                <!--Разметка для загрузки страницы-->
+                <StackPanel x:Name="PageLoadingLayout">
+                    <Button Content="Открыть файл" x:Name="FindFileButton" Click="FindFileButton_Click" 
+                            Margin="300 225 300 0" Background="White" FontWeight="Bold">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"></Setter>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </StackPanel>
+                
+                <!--Разметка для отображения страницы-->
+                <StackPanel x:Name="PageReadingLayout">
                 <!-- Отображение заголовка страницы -->
                 <TextBlock Text="{Binding Path=header}" FontSize="20" Margin="10" />
 
@@ -33,7 +47,7 @@
 
                 <!-- Кнопка перехода на следующую страницу -->
                 <Button x:Name="NextPageReadingCoursesButton" Content="Следующая страница" Click="NextPageReadingCoursesButton_Click" Margin="10" />
-
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
     </Grid>
