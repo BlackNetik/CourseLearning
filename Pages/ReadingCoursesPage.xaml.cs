@@ -76,6 +76,8 @@ namespace CourseLearning.Pages
 
         }
 
+        
+
         //Функция, заполняющая элементы разметки список объекта по итератору
         public void FillPageObjectsReading(List<PageObject> pObjects, int iterator)
         {
@@ -90,9 +92,50 @@ namespace CourseLearning.Pages
             FourAnswerTestReading.Content = pObjects[iterator].standardized_test.answer_options[3];
 
             StandartQuestionReading.Text = pObjects[iterator].question;
+
+            //Изменить потом условие if
+            if (pObjects[iterator].page_number== pObjects.Count)
+            {
+                NextPageReadingCoursesButton.Content = "Проверить ответы";
+            }
             //StandartAnswerReading.Text = pObjects[iterator].correct_answer;
         }
 
+        //Функция, проверяющая последняя ли это страница в списке
+        public bool CheckLastPage(List<PageObject> pObjects, int iterator)
+        {
+            return pObjects[iterator].page_number == pObjects.Count;
+        }
+
+        //Функция, которая скрывает тест, если он не заполнен
+        public void CheckTestPageReading(PageObject pObject)
+        {
+            if(pObject.standardized_test.question == "")
+            {
+                TestQuestionReading.Visibility= Visibility.Collapsed;
+                AnswersOnTestQuestionReading.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                TestQuestionReading.Visibility = Visibility.Visible;
+                AnswersOnTestQuestionReading.Visibility = Visibility.Visible;
+            }
+        }
+
+        //Функция, которая скрывает стандартный вопрос, если он не заполнен
+        public void CheckStandartQuestionReading(PageObject pObject)
+        {
+            if(pObject.question == "")
+            {
+                StandartQuestionReading.Visibility = Visibility.Collapsed;
+                StandartAnswerReading.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                StandartQuestionReading.Visibility = Visibility.Visible;
+                StandartAnswerReading.Visibility = Visibility.Visible;
+            }
+        }
 
     }
 }

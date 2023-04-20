@@ -39,7 +39,7 @@
                 <TextBlock x:Name="TestQuestionReading" Margin="10" />
 
                 <!-- Отображение вариантов ответа на тест -->
-                <StackPanel Margin="10">
+                <StackPanel x:Name="AnswersOnTestQuestionReading" Margin="10">
                     <RadioButton x:Name="FirstAnswerTestReading" GroupName="Answers" />
                     <RadioButton x:Name="SecondAnswerTestReading" GroupName="Answers" />
                     <RadioButton x:Name="ThirdAnswerTestReading" GroupName="Answers" />
