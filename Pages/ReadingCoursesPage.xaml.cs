@@ -120,6 +120,7 @@ namespace CourseLearning.Pages
             StandartQuestionReading.Text = pObjects[iterator].question;
             StandartAnswerReading.Text = "";
 
+            //Проверка на последнюю страницу
             if (CheckLastPage(pObjects, iterator))
             {
                 NextPageReadingCoursesButton.Visibility = Visibility.Collapsed;
@@ -173,12 +174,20 @@ namespace CourseLearning.Pages
             return pObject.question == "" || pObject.standardized_test.question == "";
         }
 
+        //Кнопка для последней страницы
         private void LastPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!ResultTestReading(pageObjects[iterator])) //Проверка результата теста
+            {
+                MessageBox.Show($"Дан неверный вариант ответа на тест. Попробуй ещё раз");
+            }
+            else if (!ResultAnswerReading(pageObjects[iterator])) //Проверка ответа на вопрос
+            {
+                MessageBox.Show($"Дан неверный ответ на вопрос. Попробуй ещё раз");
+            }
         }
 
-        //Функция, проверяющая тест на правильность
+        //Функция, проверяющая ответ теста на правильность
         public bool ResultTestReading(PageObject pObject)
         {
             switch (pObject.standardized_test.correct_answer)
@@ -196,6 +205,7 @@ namespace CourseLearning.Pages
             
         }
 
+        //Функция, проверяющая ответ на вопрос
         public bool ResultAnswerReading(PageObject pObject)
         {
             return StandartAnswerReading.Text == pObject.correct_answer.ToString();
