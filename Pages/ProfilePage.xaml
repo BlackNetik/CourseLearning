@@ -37,7 +37,8 @@
             
         </StackPanel>
         <ScrollViewer Grid.Row="1" Margin="10">
-            <DataGrid x:Name="courseProgressDataGrid" ItemsSource="{Binding CourseProgress}" AutoGenerateColumns="False">
+            <DataGrid x:Name="courseProgressDataGrid" ItemsSource="{Binding CourseProgress}" AutoGenerateColumns="False"
+                      IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Course Name" Binding="{Binding CourseName}" Width="400"/>
                     <DataGridTextColumn Header="Progress" Binding="{Binding Progress}" Width="100"/>

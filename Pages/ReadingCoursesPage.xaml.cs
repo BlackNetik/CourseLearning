@@ -40,11 +40,31 @@ namespace CourseLearning.Pages
 
         private void NextPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
         {
-            iterator++;
-            FillPageObjectsReading(pageObjects, iterator);
+            if (!ResultTestReading(pageObjects[iterator])) //Проверка результата теста
+            {
+                MessageBox.Show($"Дан неверный вариант ответа на тест. Попробуй ещё раз");
+            }
+            else if (!ResultAnswerReading(pageObjects[iterator])) //Проверка ответа на вопрос
+            {
+                MessageBox.Show($"Дан неверный ответ на вопрос. Попробуй ещё раз");
+            }
+            else
+            {
+                //Переход по итератору на новую страницу
+                iterator++;
+                FillPageObjectsReading(pageObjects, iterator);
 
-            CheckStandartQuestionReading(pageObjects[iterator]);
-            CheckTestPageReading(pageObjects[iterator]);
+                //Проверка на заполненность значений в тесте и наличие вопроса
+                CheckStandartQuestionReading(pageObjects[iterator]);
+                CheckTestPageReading(pageObjects[iterator]);
+
+                //Снятие галочки с выбранных вариантов ответа в тесте
+                FirstAnswerTestReading.IsChecked = false;
+                SecondAnswerTestReading.IsChecked = false;
+                ThirdAnswerTestReading.IsChecked = false;
+                FourAnswerTestReading.IsChecked = false;
+            }
+
         }
 
         private void FindFileButton_Click(object sender, RoutedEventArgs e)
@@ -98,8 +118,8 @@ namespace CourseLearning.Pages
             FourAnswerTestReading.Content = pObjects[iterator].standardized_test.answer_options[3];
 
             StandartQuestionReading.Text = pObjects[iterator].question;
+            StandartAnswerReading.Text = "";
 
-            //Изменить потом условие if
             if (CheckLastPage(pObjects, iterator))
             {
                 NextPageReadingCoursesButton.Visibility = Visibility.Collapsed;
@@ -109,7 +129,6 @@ namespace CourseLearning.Pages
                 }  
 
             }
-            //StandartAnswerReading.Text = pObjects[iterator].correct_answer;
         }
 
         //Функция, проверяющая последняя ли это страница в списке
@@ -157,6 +176,29 @@ namespace CourseLearning.Pages
         private void LastPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        //Функция, проверяющая тест на правильность
+        public bool ResultTestReading(PageObject pObject)
+        {
+            switch (pObject.standardized_test.correct_answer)
+            {
+                case 1:
+                    return FirstAnswerTestReading.IsChecked == true;
+                case 2:
+                    return SecondAnswerTestReading.IsChecked == true;
+                case 3:
+                    return ThirdAnswerTestReading.IsChecked == true;
+                case 4:
+                    return FourAnswerTestReading.IsChecked == true;
+            }
+            return false;
+            
+        }
+
+        public bool ResultAnswerReading(PageObject pObject)
+        {
+            return StandartAnswerReading.Text == pObject.correct_answer.ToString();
         }
     }
 }

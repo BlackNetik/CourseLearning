@@ -30,7 +30,7 @@
                     <TextBlock Text="Страницы: 1" x:Name="PageCountReading" FontSize="16" HorizontalAlignment="Right"/>
                     
                     <!-- Отображение заголовка страницы и его номера -->
-                     <TextBlock Text="fdsfsd" x:Name="HeaderPageReading" FontSize="20" HorizontalAlignment="Left" />
+                     <TextBlock x:Name="HeaderPageReading" FontSize="20" HorizontalAlignment="Left" />
 
                         <!-- Отображение текста страницы -->
                  <TextBlock x:Name="TextPageReading" Margin="10" TextWrapping="Wrap"
