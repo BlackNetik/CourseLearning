@@ -18,6 +18,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using Microsoft.Win32;
 
 namespace CourseLearning.Pages
 {
@@ -81,8 +82,25 @@ namespace CourseLearning.Pages
             // Serialize the modified list of PageObject objects back into a JSON string
             string newJsonString = JsonSerializer.Serialize(pageObjects, new JsonSerializerOptions { WriteIndented = true, Encoder = JavaScriptEncoder.Create(UnicodeRanges.BasicLatin, UnicodeRanges.Cyrillic) });
 
+            //Путь к файлу
+            var filePath = string.Empty;
+
+            //Фильтр для сохранения
+            var saveFileDialog = new SaveFileDialog
+            {
+                Filter = "Json files (*.json)|*.json|All files (*.*)|*.*"
+            };
+
+            //Открытие диалогового окна для выбора пути и названия файла
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != string.Empty)
+            {
+                filePath = saveFileDialog.FileName;
+            }
+
+
             // Write the new JSON string back to the file, overwriting the existing data
-            File.WriteAllText("example.json", newJsonString);
+            File.WriteAllText(filePath, newJsonString);
 
             MessageBox.Show("Курс сохранен!");
         }

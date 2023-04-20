@@ -14,10 +14,11 @@
                 <!--Разметка для загрузки страницы-->
                 <StackPanel x:Name="PageLoadingLayout">
                     <Button Content="Открыть файл" x:Name="FindFileButton" Click="FindFileButton_Click" 
-                            Margin="300 225 300 0" Background="White" FontWeight="Bold">
+                            Margin="300 225 300 0" Background="White" FontWeight="Bold"
+                            Width="160" Height="30">
                         <Button.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="20"></Setter>
+                                <Setter Property="CornerRadius" Value="6"></Setter>
                             </Style>
                         </Button.Resources>
                     </Button>
