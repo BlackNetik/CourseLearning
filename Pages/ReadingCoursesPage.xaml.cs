@@ -27,7 +27,7 @@ namespace CourseLearning.Pages
     public partial class ReadingCoursesPage : Page
     {
         string jsonPath = "";
-        List<PageObject> pageObjects = new List<PageObject> { new PageObject() };
+        List<PageObject> pageObjects = new List<PageObject>();
         int iterator = 0;
 
         public ReadingCoursesPage()
@@ -36,12 +36,12 @@ namespace CourseLearning.Pages
 
             //Скрытые элементов отображения страницы
             PageReadingLayout.Visibility = Visibility.Collapsed;
-            this.DataContext = pageObjects[iterator];
         }
 
         private void NextPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            iterator++;
+            FillPageObjectsReading(pageObjects, iterator);
         }
 
         private void FindFileButton_Click(object sender, RoutedEventArgs e)
@@ -69,13 +69,28 @@ namespace CourseLearning.Pages
                 //Считывания с файла в список объектов класса
                 pageObjects = JsonSerializer.Deserialize<List<PageObject>>(jsonContents, jso);
 
-                HeaderPageReading.Text = pageObjects[0].header.ToString();
-                TextPageReading.Text = pageObjects[0].text.ToString();
-                //MessageBox.Show($"{testpageObjects[0].text}");
+                //Заполнение значений
+                FillPageObjectsReading(pageObjects, iterator);
             }
 
 
+        }
 
+        //Функция, заполняющая элементы разметки список объекта по итератору
+        public void FillPageObjectsReading(List<PageObject> pObjects, int iterator)
+        {
+
+            HeaderPageReading.Text = pObjects[iterator].header;
+            TextPageReading.Text = pObjects[iterator].text;
+            TestQuestionReading.Text = pObjects[iterator].standardized_test.question;
+
+            FirstAnswerTestReading.Content = pObjects[iterator].standardized_test.answer_options[0];
+            SecondAnswerTestReading.Content = pObjects[iterator].standardized_test.answer_options[1];
+            ThirdAnswerTestReading.Content = pObjects[iterator].standardized_test.answer_options[2];
+            FourAnswerTestReading.Content = pObjects[iterator].standardized_test.answer_options[3];
+
+            StandartQuestionReading.Text = pObjects[iterator].question;
+            //StandartAnswerReading.Text = pObjects[iterator].correct_answer;
         }
 
 

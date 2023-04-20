@@ -27,23 +27,23 @@
                 <!--Разметка для отображения страницы-->
                 <StackPanel x:Name="PageReadingLayout">
                 <!-- Отображение заголовка страницы -->
-                <TextBlock x:Name="HeaderPageReading" Text="{Binding Path=header}" FontSize="20" Margin="10" />
+                <TextBlock x:Name="HeaderPageReading" FontSize="20" Margin="10" />
 
                 <!-- Отображение текста страницы -->
-                    <ScrollViewer Margin="10">
-                        <TextBlock x:Name="TextPageReading" Text="{Binding Path=text}" Margin="10" />
-                    </ScrollViewer>
+                <ScrollViewer Margin="10">
+                    <TextBlock x:Name="TextPageReading" Margin="10" />
+                </ScrollViewer>
                 
 
                 <!-- Отображение вопроса теста -->
-                <TextBlock x:Name="TestQuestionReading" Text="{Binding Path=standardized_test.question}" Margin="10" />
+                <TextBlock x:Name="TestQuestionReading" Margin="10" />
 
                 <!-- Отображение вариантов ответа на тест -->
                 <StackPanel Margin="10">
-                    <RadioButton x:Name="FirstAnswerTestReading" Content="{Binding Path=standardized_test.answer_options[0]}" GroupName="Answers" />
-                    <RadioButton x:Name="SecondAnswerTestReading" Content="{Binding Path=standardized_test.answer_options[1]}" GroupName="Answers" />
-                    <RadioButton x:Name="ThirdAnswerTestReading" Content="{Binding Path=standardized_test.answer_options[2]}" GroupName="Answers" />
-                    <RadioButton x:Name="FourAnswerTestReading" Content="{Binding Path=standardized_test.answer_options[3]}" GroupName="Answers" />
+                    <RadioButton x:Name="FirstAnswerTestReading" GroupName="Answers" />
+                    <RadioButton x:Name="SecondAnswerTestReading" GroupName="Answers" />
+                    <RadioButton x:Name="ThirdAnswerTestReading" GroupName="Answers" />
+                    <RadioButton x:Name="FourAnswerTestReading" GroupName="Answers" />
                 </StackPanel>
 
                 <!--Вывод стандартного вопроса-->
