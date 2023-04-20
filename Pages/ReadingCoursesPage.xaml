@@ -26,10 +26,13 @@
                 
                 <!--Разметка для отображения страницы-->
                 <StackPanel x:Name="PageReadingLayout">
-                <!-- Отображение заголовка страницы -->
-                <TextBlock x:Name="HeaderPageReading" FontSize="20" Margin="10" />
 
-                <!-- Отображение текста страницы -->
+                    <TextBlock Text="Страницы: 1" x:Name="PageCountReading" FontSize="16" HorizontalAlignment="Right"/>
+                    
+                    <!-- Отображение заголовка страницы и его номера -->
+                     <TextBlock Text="fdsfsd" x:Name="HeaderPageReading" FontSize="20" HorizontalAlignment="Left" />
+
+                        <!-- Отображение текста страницы -->
                  <TextBlock x:Name="TextPageReading" Margin="10" TextWrapping="Wrap"
                HorizontalAlignment="Stretch" TextAlignment="Left"/>
 

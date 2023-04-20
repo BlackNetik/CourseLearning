@@ -87,7 +87,7 @@ namespace CourseLearning.Pages
         //Функция, заполняющая элементы разметки список объекта по итератору
         public void FillPageObjectsReading(List<PageObject> pObjects, int iterator)
         {
-
+            PageCountReading.Text = $"Страница {pObjects[iterator].page_number}/{pObjects.Count}";
             HeaderPageReading.Text = pObjects[iterator].header;
             TextPageReading.Text = pObjects[iterator].text;
             TestQuestionReading.Text = pObjects[iterator].standardized_test.question;
