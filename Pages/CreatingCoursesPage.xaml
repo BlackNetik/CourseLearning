@@ -17,9 +17,9 @@
         <TextBox x:Name="PageHeader" Text="Введите заголовок страницы или название курса" FontSize="24" Margin="20"/>
 
                 <!-- Page text (scrolling) -->
-            <ScrollViewer Margin="20,10">
-                <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="300"/>
-            </ScrollViewer>
+            
+                <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="300" Margin="20 0 20 0"/>
+            
 
             <!-- Standardized test question -->
             <StackPanel Margin="20,10">

@@ -63,8 +63,24 @@
                     </Button.Resources>
                 </Button>
             </Grid>
-            
-            <Grid Margin="0 360 0 0">
+
+            <Grid Margin="0 10 0 0">
+                <Ellipse HorizontalAlignment="Left" Height="35" Margin="10,0,0,0" VerticalAlignment="Center" Width="35">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="/Images/icons8-help-48.png" Stretch="Fill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Button x:Name="sideBarHelp" Content="Справка" Margin="50,10,0,10" HorizontalAlignment="Left" Width="140" 
+                        Background="AliceBlue" Click="sideBarHelp_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"></Setter>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+
+            <Grid Margin="0 320 0 0">
                 <Ellipse HorizontalAlignment="Left" Height="35" Margin="10,0,0,0" VerticalAlignment="Center" Width="35">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="/Images/icons8-logout-48.png" Stretch="Fill"/>
@@ -79,8 +95,6 @@
                     </Button.Resources>
                 </Button>
             </Grid>
-            <!-- <Button Content="Read courses" Margin="10" /> 
-            <Button Content="Logout" Margin="10" /> -->
         </StackPanel>
 
         <!-- Frame to display content -->

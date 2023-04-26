@@ -51,6 +51,10 @@ namespace CourseLearning.Windows
             // Navigate to the read courses page
             contentFrame.Navigate(new ReadingCoursesPage());
         }
+        private void sideBarHelp_Click(object sender, RoutedEventArgs e)
+        {
+            contentFrame.Navigate(new HelpPage());
+        }
 
         //Выход из профиля
         private void sideBarLogout_Click(object sender, RoutedEventArgs e)
@@ -59,5 +63,7 @@ namespace CourseLearning.Windows
             this.Close();
             mainWindow.Show();
         }
+
+        
     }
 }
