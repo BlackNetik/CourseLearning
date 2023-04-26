@@ -18,8 +18,8 @@
 
                 <!-- Page text (scrolling) -->
             <ScrollViewer Margin="20,10">
-                <TextBox x:Name="PageText" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Height="300"/>
-        </ScrollViewer>
+                <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="300"/>
+            </ScrollViewer>
 
             <!-- Standardized test question -->
             <StackPanel Margin="20,10">
