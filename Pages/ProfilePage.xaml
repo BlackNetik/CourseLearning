@@ -40,9 +40,9 @@
             <DataGrid x:Name="courseProgressDataGrid" ItemsSource="{Binding CourseProgress}" AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Course Name" Binding="{Binding CourseName}" Width="400"/>
-                    <DataGridTextColumn Header="Progress" Binding="{Binding Progress}" Width="100"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>
+                    <DataGridTextColumn Header="Наименование курса" Binding="{Binding course_name}" Width="400"/>
+                    <DataGridTextColumn Header="Прогресс" Binding="{Binding progress}" Width="100"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding status_course}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
