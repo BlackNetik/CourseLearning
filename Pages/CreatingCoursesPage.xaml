@@ -17,8 +17,8 @@
         <TextBox x:Name="PageHeader" Text="Введите заголовок страницы или название курса" FontSize="24" Margin="20"/>
 
                 <!-- Page text (scrolling) -->
-            
-                <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="300" Margin="20 0 20 0"/>
+
+            <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="300" Margin="20 0 20 0" SpellCheck.IsEnabled="True" Language="ru-ru"/>
             
 
             <!-- Standardized test question -->
