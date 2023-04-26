@@ -9,6 +9,43 @@
       Title="HelpPage" Background="AliceBlue">
 
     <Grid>
-        
+        <ScrollViewer>
+            <TextBlock  Margin="10 10 10 10" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                У лукоморья дуб зелёный;<LineBreak></LineBreak>
+                
+Златая цепь на дубе том:<LineBreak></LineBreak>
+И днём и ночью кот учёный<LineBreak></LineBreak>
+Всё ходит по цепи кругом;<LineBreak></LineBreak>
+Идёт направо - песнь заводит,<LineBreak></LineBreak>
+Налево - сказку говорит. <LineBreak></LineBreak>
+Там чудеса: там леший бродит, 
+Русалка на ветвях сидит;<LineBreak></LineBreak>
+Там на неведомых дорожках<LineBreak></LineBreak>
+Следы невиданных зверей;<LineBreak></LineBreak>
+Избушка там на курьих ножках<LineBreak></LineBreak>
+Стоит без окон, без дверей;<LineBreak></LineBreak>
+Там лес и дол видений полны;<LineBreak></LineBreak>
+Там о заре прихлынут волны<LineBreak></LineBreak>
+На брег песчаный и пустой,<LineBreak></LineBreak>
+И тридцать витязей прекрасных<LineBreak></LineBreak>
+Чредой из вод выходят ясных,<LineBreak></LineBreak>
+И с ними дядька их морской;<LineBreak></LineBreak>
+Там королевич мимоходом<LineBreak></LineBreak>
+Пленяет грозного царя;<LineBreak></LineBreak>
+Там в облаках перед народом<LineBreak></LineBreak>
+Через леса, через моря<LineBreak></LineBreak>
+Колдун несёт богатыря;<LineBreak></LineBreak>
+В темнице там царевна тужит,<LineBreak></LineBreak>
+А бурый волк ей верно служит;<LineBreak></LineBreak>
+Там ступа с Бабою Ягой<LineBreak></LineBreak>
+Идёт, бредёт сама собой,<LineBreak></LineBreak>
+Там царь Кащей над златом чахнет;<LineBreak></LineBreak>
+Там русский дух... там Русью пахнет!<LineBreak></LineBreak>
+И там я был, и мёд я пил;<LineBreak></LineBreak>
+У моря видел дуб зелёный;<LineBreak></LineBreak>
+Под ним сидел, и кот учёный<LineBreak></LineBreak>
+Свои мне сказки говорил.<LineBreak></LineBreak>
+            </TextBlock>
+        </ScrollViewer>
     </Grid>
 </Page>
