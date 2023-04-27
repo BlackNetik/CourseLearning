@@ -19,6 +19,7 @@ using System.IO;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.Win32;
+using CourseLearning.Pages;
 
 namespace CourseLearning.Pages
 {
@@ -121,17 +122,16 @@ namespace CourseLearning.Pages
                 PageObject result = ExtractPageObjectFromMarkup();
                 pageObjects[actualIterator-1] = result;
             }
-            
 
             //Вывод кнопки перехода на прошлую страницу
             PreviousPageCreating.Visibility = Visibility.Visible;
 
-            //Очистка значений в разметке
-            ClearTextBoxes();
 
-            //Запись новой страницы
+            //Смена итератора
             actualIterator += 1;
-            PageNumber.Text = $"Страница: {actualIterator}";
+            FillPageObjectsCourseCreating(pageObjects, actualIterator);
+
+            
 
 
         }
@@ -152,18 +152,41 @@ namespace CourseLearning.Pages
                 pageObjects[actualIterator-1] = result;
             }
 
-            //Очистка значений в разметке
-            ClearTextBoxes();
 
-            //Запись новой страницы
+            //Cмена итератора
             actualIterator -= 1;
-            PageNumber.Text = $"Страница: {actualIterator}";
+            FillPageObjectsCourseCreating(pageObjects, actualIterator);
+
+            
         }
 
+        //Функция, которая заполняет значения полей разметки
+        public void FillPageObjectsCourseCreating(List<PageObject> pObjects, int iterator)
+        {
+            if(iterator > pageObjects.Count)
+            {
+                ClearTextBoxes();
+            }
+            else
+            {
+                iterator -= 1;
+                PageNumber.Text = $"Страница: {actualIterator}";
+                PageHeader.Text = pObjects[iterator].header;
+                PageText.Text = pObjects[iterator].text;
+                TestQuestion.Text = pObjects[iterator].standardized_test.question;
+                AnswerOption1.Text = pObjects[iterator].standardized_test.answer_options[0];
+                AnswerOption2.Text = pObjects[iterator].standardized_test.answer_options[1];
+                AnswerOption3.Text = pObjects[iterator].standardized_test.answer_options[2];
+                AnswerOption4.Text = pObjects[iterator].standardized_test.answer_options[3];
+                CorrectAnswer.SelectedIndex = pObjects[iterator].standardized_test.correct_answer - 1;
 
+                RegularQuestion.Text = pObjects[iterator].question;
+                CorrectAnswerText.Text = pObjects[iterator].correct_answer;
+            }
+        }
 
-        //Функция, которая очищает значения полей разметки
-        private void ClearTextBoxes()
+            //Функция, которая очищает значения полей разметки
+            private void ClearTextBoxes()
         {
             PageHeader.Text = "";
             PageText.Text = "";

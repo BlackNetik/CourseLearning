@@ -73,7 +73,7 @@
 
             <StackPanel  Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
                 <!-- Кнопка перехода на предидущую страницу-->
-                <Button x:Name="PreviousPageCreating" Content="Перейти на предидущую страницу"
+                <Button x:Name="PreviousPageCreating" Content="Перейти на предыдущую страницу"
                         Background="White" FontSize="14" Margin="0 0 10 0" Click="PreviousPageCreating_Click"
                         Visibility="Collapsed">
                     <Button.Resources>
