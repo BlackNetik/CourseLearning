@@ -165,10 +165,12 @@ namespace CourseLearning.Pages
         {
             if(iterator > pageObjects.Count)
             {
+                //Если страница новая - выводим пустую разметку
                 ClearTextBoxes();
             }
             else
             {
+                //Отнимаем еденицу от итератора, поскольку он не совпадает с индексом
                 iterator -= 1;
                 PageNumber.Text = $"Страница: {actualIterator}";
                 PageHeader.Text = pObjects[iterator].header;
