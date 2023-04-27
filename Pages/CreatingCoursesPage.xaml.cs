@@ -30,6 +30,9 @@ namespace CourseLearning.Pages
         //Лист страниц, необходимый для дальнейшего сохранения в JSON файле
         List<PageObject> pageObjects = new List<PageObject>();
 
+        //Итератор для страниц
+        int actualIterator = 1;
+
         public CreatingCoursesPage()
         {
             InitializeComponent();
@@ -108,20 +111,56 @@ namespace CourseLearning.Pages
         private void NextPageCreating_Click(object sender, RoutedEventArgs e)
         {
             //Добавление объекта в список объектов
-            PageObject result = ExtractPageObjectFromMarkup();
-            pageObjects.Add(result);
+            if(actualIterator > pageObjects.Count)
+            {
+                PageObject result = ExtractPageObjectFromMarkup();
+                pageObjects.Add(result);
+            }
+            else
+            {
+                PageObject result = ExtractPageObjectFromMarkup();
+                pageObjects[actualIterator-1] = result;
+            }
+            
+
+            //Вывод кнопки перехода на прошлую страницу
+            PreviousPageCreating.Visibility = Visibility.Visible;
 
             //Очистка значений в разметке
             ClearTextBoxes();
 
             //Запись новой страницы
-            string pageNumberText = PageNumber.Text;
-            string[] pageNumberParts = pageNumberText.Split(':');
-            int pageNumber = int.Parse(pageNumberParts[1].Trim());
-            PageNumber.Text = $"Страница: {pageNumber+=1}";
+            actualIterator += 1;
+            PageNumber.Text = $"Страница: {actualIterator}";
 
 
         }
+
+        private void PreviousPageCreating_Click(object sender, RoutedEventArgs e)
+        {
+            if(actualIterator == 2) PreviousPageCreating.Visibility = Visibility.Collapsed;
+
+            //Добавление объекта в список объектов
+            if (actualIterator > pageObjects.Count)
+            {
+                PageObject result = ExtractPageObjectFromMarkup();
+                pageObjects.Add(result);
+            }
+            else
+            {
+                PageObject result = ExtractPageObjectFromMarkup();
+                pageObjects[actualIterator-1] = result;
+            }
+
+            //Очистка значений в разметке
+            ClearTextBoxes();
+
+            //Запись новой страницы
+            actualIterator -= 1;
+            PageNumber.Text = $"Страница: {actualIterator}";
+        }
+
+
 
         //Функция, которая очищает значения полей разметки
         private void ClearTextBoxes()
@@ -138,5 +177,6 @@ namespace CourseLearning.Pages
             CorrectAnswerText.Text = "";
         }
 
+        
     }
 }
