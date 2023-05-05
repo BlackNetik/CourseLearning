@@ -33,6 +33,82 @@ namespace CourseLearning
             //Заполняем данные чтобы каждый раз не вводить по новой. После завершения работы не забыть удалить
             loginTextBox.Text = "admin";
             passwordPasswordBox.Password = "admin";
+
+            //Подключение к базе данных
+            var conn = GetConnection();
+            var cmd = new NpgsqlCommand();
+
+            using (conn)
+            {
+                // Открытие подключения
+                conn.Open();
+
+                // Проверка наличия базы данных
+                using (var testCmd = new NpgsqlCommand("SELECT COUNT(*) FROM pg_database WHERE datname = 'courselearning'", conn))
+                {
+                    object resultObj = testCmd.ExecuteScalar();
+                    int result = 0;
+                    if (resultObj != null && resultObj != DBNull.Value)
+                    {
+                        result = Convert.ToInt32(resultObj);
+                    }
+
+                    // Создание базы данных, если она не существует
+                    if (result == 0)
+                    {
+                        using (var createCmd = new NpgsqlCommand("CREATE DATABASE courselearning", conn))
+                        {
+                            createCmd.ExecuteNonQuery();
+                        }
+
+                        // Проверка наличия таблицы Users
+                        using (var usersCmd = new NpgsqlCommand("SELECT to_regclass('public.users')", conn))
+                        {
+                            bool tableExists = (usersCmd.ExecuteScalar() != DBNull.Value);
+
+                            // Создание таблицы Users, если она не существует
+                            if (!tableExists)
+                            {
+                                using (var createCmd = new NpgsqlCommand(
+                                    "CREATE TABLE Users (" +
+                                        "id SERIAL PRIMARY KEY, " +
+                                        "username VARCHAR(50) UNIQUE NOT NULL, " +
+                                        "password VARCHAR(255) NOT NULL, " +
+                                        "first_name VARCHAR(50) NOT NULL, " +
+                                        "last_name VARCHAR(50) NOT NULL" +
+                                    ");", conn))
+                                {
+                                    createCmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
+
+                        // Проверка наличия таблицы CourseProgress
+                        using (var progressCmd = new NpgsqlCommand("SELECT to_regclass('public.courseprogress')", conn))
+                        {
+                            bool tableExists = (progressCmd.ExecuteScalar() != DBNull.Value);
+
+                            // Создание таблицы CourseProgress, если она не существует
+                            if (!tableExists)
+                            {
+                                using (var createCmd = new NpgsqlCommand(
+                                    "CREATE TABLE CourseProgress (" +
+                                        "id SERIAL PRIMARY KEY, " +
+                                        "id_user INTEGER NOT NULL, " +
+                                        "course_name TEXT, " +
+                                        "progress INTEGER NOT NULL, " +
+                                        "status_course TEXT, " +
+                                        "FOREIGN KEY (id_user) REFERENCES Users(id)" +
+                                    ");", conn))
+                                {
+                                    createCmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
+                    }
+                }
+
+            }
         }
         
 
