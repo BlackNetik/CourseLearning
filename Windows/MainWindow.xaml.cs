@@ -64,6 +64,9 @@ namespace CourseLearning.Windows
             mainWindow.Show();
         }
 
-        
+        private void sideBarListCourses_Click(object sender, RoutedEventArgs e)
+        {
+            contentFrame.Navigate(new ListCoursesPage());
+        }
     }
 }

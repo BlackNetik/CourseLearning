@@ -17,8 +17,7 @@
         <TextBlock x:Name="PageNumber" Text="Страница: 1" FontSize="16" Margin="20" />
 
         <!-- Page header -->
-            <TextBox x:Name="PageHeader" Text="" FontSize="24" Margin="20"
-                     Foreground="Gray">
+            <TextBox x:Name="PageHeader" Text="" FontSize="24" Margin="20">
                 <TextBox.ToolTip>
                     <ToolTip>
                         Введите заголовок страницы или название курса
