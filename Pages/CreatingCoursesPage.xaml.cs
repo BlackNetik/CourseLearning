@@ -202,6 +202,6 @@ namespace CourseLearning.Pages
             CorrectAnswerText.Text = "";
         }
 
-        
+
     }
 }

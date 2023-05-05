@@ -21,7 +21,7 @@ namespace CourseLearning.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
+        //string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
         User ProfileUser { get; set; }
         public MainWindow(User user)
         {

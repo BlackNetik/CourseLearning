@@ -8,17 +8,34 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CreatingCoursesPage" Background="AliceBlue">
 
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </Page.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel>
         <!-- Course page number -->
         <TextBlock x:Name="PageNumber" Text="Страница: 1" FontSize="16" Margin="20" />
 
         <!-- Page header -->
-        <TextBox x:Name="PageHeader" Text="Введите заголовок страницы или название курса" FontSize="24" Margin="20"/>
+            <TextBox x:Name="PageHeader" Text="" FontSize="24" Margin="20"
+                     Foreground="Gray">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        Введите заголовок страницы или название курса
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
 
                 <!-- Page text (scrolling) -->
 
-            <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="300" Margin="20 0 20 0" SpellCheck.IsEnabled="True" Language="ru-ru"/>
+            <TextBox x:Name="PageText" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" 
+                     Height="300" Margin="20 0 20 0" SpellCheck.IsEnabled="True" Language="ru-ru">
+                <TextBox.ToolTip>
+                    <ToolTip>
+                        Введите текст, раскрывающий заголовок страницы
+                    </ToolTip>
+                </TextBox.ToolTip>
+            </TextBox>
             
 
             <!-- Standardized test question -->
@@ -26,7 +43,13 @@
                 <TextBlock Text="Тест с вариантами ответа:" FontWeight="Bold" />
                 <StackPanel Orientation="Vertical"  Margin="0,5" HorizontalAlignment="Stretch">
                         <TextBlock Text="Вопрос к тесту: " HorizontalAlignment="Left"/>
-                        <TextBox x:Name="TestQuestion" TextWrapping="Wrap"/>
+                        <TextBox x:Name="TestQuestion" TextWrapping="Wrap">
+                        <TextBox.ToolTip>
+                            <ToolTip>
+                                Введите текст вопроса, соответствующий материал страницу и с которым справится обучающийся
+                            </ToolTip>
+                        </TextBox.ToolTip>
+                    </TextBox>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical"  Margin="0,5" HorizontalAlignment="Stretch">
@@ -58,6 +81,9 @@
                         <ComboBoxItem Content="2" />
                         <ComboBoxItem Content="3" />
                         <ComboBoxItem Content="4" />
+                        <ComboBox.ToolTip>
+                            Выберете верный вариант ответа
+                        </ComboBox.ToolTip>
                     </ComboBox>
                 </StackPanel>
                 
@@ -66,7 +92,13 @@
             <!-- Regular question with written answer -->
             <StackPanel Margin="20,10">
                 <TextBlock Text="Вопрос: " FontWeight="Bold" />
-                <TextBox x:Name="RegularQuestion" TextWrapping="Wrap" Margin="0,5" />
+                <TextBox x:Name="RegularQuestion" TextWrapping="Wrap" Margin="0,5">
+                    <TextBox.ToolTip>
+                        <ToolTip>
+                            Введите текст вопроса, соответствующий материал страницу и еа который обучающийся сможет написать верный ответ
+                        </ToolTip>
+                    </TextBox.ToolTip>
+                </TextBox>
                 <TextBlock Text="Корректный письменный ответ к вопросу: "/>
                 <TextBox x:Name="CorrectAnswerText" TextWrapping="Wrap" Margin="0,5" />
             </StackPanel>
