@@ -14,23 +14,30 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal" Margin="10">
-            <TextBox x:Name="searchTextBox" Width="200" Margin="0,0,10,0" />
-            <Button x:Name="searchButton" Content="Search" Click="searchButton_Click" />
+        <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+            <TextBox x:Name="searchTextBox" Width="400" Margin="0,0,10,0" />
+            <Button x:Name="searchButton" Content="Искать" Click="searchButton_Click" Background="White"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-            <DataGrid x:Name="coursesDataGrid" AutoGenerateColumns="False">
+            <DataGrid x:Name="coursesDataGrid" AutoGenerateColumns="False" IsReadOnly="True" 
+                      CanUserAddRows="False" CanUserResizeRows="True" CanUserResizeColumns="False">
                 <DataGrid.Columns>
                     <!-- Убираем столбец "Id" -->
-                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" />
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" Width="400">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <!-- Добавляем новый столбец с объединенными данными Фамилии и Имени пользователя -->
-                    <DataGridTemplateColumn Header="Пользователь">
+                    <DataGridTemplateColumn Header="Пользователь" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock>
+                                <TextBlock TextWrapping="Wrap">
                                     <TextBlock.Text>
-                                        <MultiBinding StringFormat="{}{0}, {1}">
+                                        <MultiBinding StringFormat="{}{0} {1}">
                                             <Binding Path="User.LastName" />
                                             <Binding Path="User.FirstName" />
                                         </MultiBinding>
@@ -39,7 +46,13 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="URL" Binding="{Binding Url}" />
+                    <DataGridTextColumn Header="URL" Binding="{Binding Url}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

@@ -135,6 +135,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Classes\ClassesJSON.cs" />
+    <Compile Include="Classes\Course.cs" />
     <Compile Include="Classes\CourseProgress.cs" />
     <Compile Include="Classes\Users.cs" />
     <Compile Include="Pages\CreatingCoursesPage.xaml.cs">
