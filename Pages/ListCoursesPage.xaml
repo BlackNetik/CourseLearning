@@ -9,6 +9,40 @@
       Title="ListCoursesPage">
 
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <TextBox x:Name="searchTextBox" Width="200" Margin="0,0,10,0" />
+            <Button x:Name="searchButton" Content="Search" Click="searchButton_Click" />
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <DataGrid x:Name="coursesDataGrid" AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <!-- Убираем столбец "Id" -->
+                    <DataGridTextColumn Header="Название" Binding="{Binding Name}" />
+                    <!-- Добавляем новый столбец с объединенными данными Фамилии и Имени пользователя -->
+                    <DataGridTemplateColumn Header="Пользователь">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock>
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}, {1}">
+                                            <Binding Path="User.LastName" />
+                                            <Binding Path="User.FirstName" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="URL" Binding="{Binding Url}" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
     </Grid>
+
 </Page>
