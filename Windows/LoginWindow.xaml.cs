@@ -105,6 +105,27 @@ namespace CourseLearning
                                 }
                             }
                         }
+
+                        // Проверка наличия таблицы Courses
+                        using (var coursesCmd = new NpgsqlCommand("SELECT to_regclass('public.courses')", conn))
+                        {
+                            bool tableExists = (coursesCmd.ExecuteScalar() != DBNull.Value);
+
+                            // Создание таблицы Courses, если она не существует
+                            if (!tableExists)
+                            {
+                                using (var createCmd = new NpgsqlCommand(
+                                    "CREATE TABLE Courses (" +
+                                        "Id SERIAL PRIMARY KEY, " +
+                                        "id_user INTEGER, " +
+                                        "name TEXT, " +
+                                        "url TEXT" +
+                                    ");", conn))
+                                {
+                                    createCmd.ExecuteNonQuery();
+                                }
+                            }
+                        }
                     }
                 }
 
