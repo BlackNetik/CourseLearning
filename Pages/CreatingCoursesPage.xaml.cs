@@ -20,6 +20,7 @@ using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Microsoft.Win32;
 using CourseLearning.Pages;
+using System.Data.SqlClient;
 
 namespace CourseLearning.Pages
 {
@@ -34,9 +35,16 @@ namespace CourseLearning.Pages
         //Итератор для страниц
         int actualIterator = 1;
 
-        public CreatingCoursesPage()
+        //Строка для подключения к БД
+        string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
+
+        //Пользователь
+        User CurrentUser { get; set; }
+
+        public CreatingCoursesPage(User user)
         {
             InitializeComponent();
+            CurrentUser= user;
         }
 
 
@@ -105,6 +113,9 @@ namespace CourseLearning.Pages
 
             // Write the new JSON string back to the file, overwriting the existing data
             File.WriteAllText(filePath, newJsonString);
+
+            //Добавление курса в базу данных
+            AddOrUpdateCourse(CurrentUser.Id,CurrentUser.FirstName + " " + CurrentUser.LastName,"");
 
             MessageBox.Show("Курс сохранен!");
         }
@@ -200,6 +211,40 @@ namespace CourseLearning.Pages
             CorrectAnswer.SelectedIndex = 0;
             RegularQuestion.Text = "";
             CorrectAnswerText.Text = "";
+        }
+
+        //Функция, которая добавляет курс в базу данных
+        public void AddOrUpdateCourse(int userId, string name, string url)
+        {
+            using (SqlConnection connection = new SqlConnection(ConnectionToBD))
+            {
+                connection.Open();
+
+                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Courses WHERE id_user = @userId AND name = @name", connection);
+                command.Parameters.AddWithValue("@userId", userId);
+                command.Parameters.AddWithValue("@name", name);
+
+                int count = (int)command.ExecuteScalar();
+
+                if (count == 0)
+                {
+                    command = new SqlCommand("INSERT INTO Courses (id_user, name, url) VALUES (@userId, @name, @url)", connection);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@name", name);
+                    command.Parameters.AddWithValue("@url", url);
+
+                    command.ExecuteNonQuery();
+                }
+                else
+                {
+                    command = new SqlCommand("UPDATE Courses SET url = @url WHERE id_user = @userId AND name = @name", connection);
+                    command.Parameters.AddWithValue("@userId", userId);
+                    command.Parameters.AddWithValue("@name", name);
+                    command.Parameters.AddWithValue("@url", url);
+
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
 

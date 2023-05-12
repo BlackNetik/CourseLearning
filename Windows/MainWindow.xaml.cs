@@ -43,7 +43,7 @@ namespace CourseLearning.Windows
         private void sideBarCreatingCourses_Click(object sender, RoutedEventArgs e)
         {
             // Navigate to the creating courses page
-            contentFrame.Navigate(new CreatingCoursesPage());
+            contentFrame.Navigate(new CreatingCoursesPage(ProfileUser));
         }
 
         private void sideBarReadingCourses_Click(object sender, RoutedEventArgs e)
