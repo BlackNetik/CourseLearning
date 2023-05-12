@@ -65,6 +65,20 @@ namespace CourseLearning.Pages
                 MessageBox.Show("Error: " + ex.Message);
             }
         }
+
+        private void profileExportButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Get the row that contains the button that was clicked
+            var button = sender as Button;
+            var row = button?.DataContext as DataRowView;
+
+            // Check if the row is not null and display the ID in a MessageBox
+            if (row != null)
+            {
+                string courseName = row["course_name"].ToString();
+                MessageBox.Show($"The selected course is {courseName}");
+            }
+        }
     }
 
 }

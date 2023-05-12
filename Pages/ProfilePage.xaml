@@ -51,7 +51,14 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Статус" Binding="{Binding status_course}" Width="*"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding status_course}" Width="100"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="profileExportButton" Content="Экспорт в WORD" Click="profileExportButton_Click" Background="White"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>
