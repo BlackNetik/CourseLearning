@@ -89,9 +89,6 @@ namespace CourseLearning.Pages
             
             if (openFileDialog.ShowDialog() == true)
             {
-                //Скрытие кнопки открытия файла
-                PageReadingLayout.Visibility = Visibility.Visible;
-                PageLoadingLayout.Visibility = Visibility.Collapsed;
 
                 //Получение пути файла
                 jsonPath = openFileDialog.FileName;
@@ -105,14 +102,30 @@ namespace CourseLearning.Pages
                 //Считывания с файла в список объектов класса
                 pageObjects = JsonSerializer.Deserialize<List<PageObject>>(jsonContents, jso);
 
-                //Заполнение значений
-                FillPageObjectsReading(pageObjects, iterator);
+                //Получение значения итератора
+                iterator = GetCourseProgress(CurentUser.Id, pageObjects[0].header,pageObjects.Count);
 
-                CheckStandartQuestionReading(pageObjects[iterator]);
-                CheckTestPageReading(pageObjects[iterator]);
+                if(iterator < pageObjects.Count)
+                {
+                    //Скрытие кнопки открытия файла
+                    PageReadingLayout.Visibility = Visibility.Visible;
+                    PageLoadingLayout.Visibility = Visibility.Collapsed;
 
-                //Сохранение прогресса
-                AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header,iterator,pageObjects.Count);
+                    //Заполнение значений
+                    FillPageObjectsReading(pageObjects, iterator);
+
+                    CheckStandartQuestionReading(pageObjects[iterator]);
+                    CheckTestPageReading(pageObjects[iterator]);
+
+                    //Сохранение прогресса
+                    AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header, iterator, pageObjects.Count);
+                }
+                else
+                {
+                    MessageBox.Show("Курс пройден! Поздравляю!");
+                }
+
+                
             }
 
 
@@ -204,7 +217,7 @@ namespace CourseLearning.Pages
             else
             {
                 //Сохранение прогресса
-                AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header, iterator, pageObjects.Count);
+                AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header, iterator + 1, pageObjects.Count);
 
                 //переход в профиль
                 NavigationService.Navigate(new ProfilePage(CurentUser));
@@ -268,6 +281,37 @@ namespace CourseLearning.Pages
                     }
 
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // Функция, проверяющая прогресс прохождения курса в базе данных и возвращающая текущую страницу
+        public int GetCourseProgress(int userId, string courseName, int totalPages)
+        {
+            using (var connection = new NpgsqlConnection(ConnectionToBD))
+            {
+                connection.Open();
+
+                using (var command = new NpgsqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT COUNT(*) FROM courseprogress WHERE id_user = @userId AND course_name = @courseName";
+                    command.Parameters.AddWithValue("userId", userId);
+                    command.Parameters.AddWithValue("courseName", courseName);
+
+                    var count = (long)command.ExecuteScalar();
+
+                    if (count == 0)
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        command.CommandText = "SELECT progress FROM courseprogress WHERE id_user = @userId AND course_name = @courseName";
+                        var progress = (int)command.ExecuteScalar();
+
+                        return (int)Math.Round((double)progress / 100 * totalPages);
+                    }
                 }
             }
         }
