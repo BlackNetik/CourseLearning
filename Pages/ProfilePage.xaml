@@ -40,18 +40,18 @@
             <DataGrid x:Name="courseProgressDataGrid" ItemsSource="{Binding CourseProgress}" AutoGenerateColumns="False"
                       IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Наименование курса" Binding="{Binding course_name}" Width="400"/>
-                    <DataGridTemplateColumn Header="Прогресс" Width="100">
+                    <DataGridTextColumn Header="Наименование курса" Binding="{Binding course_name}" Width="*"/>
+                    <DataGridTemplateColumn Header="Прогресс" Width="65">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                     <TextBlock Text="{Binding progress}"/>
                                     <TextBlock Text="%"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Статус" Binding="{Binding status_course}" Width="100"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding status_course}" Width="65" />
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
