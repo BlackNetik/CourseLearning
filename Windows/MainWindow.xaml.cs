@@ -49,7 +49,7 @@ namespace CourseLearning.Windows
         private void sideBarReadingCourses_Click(object sender, RoutedEventArgs e)
         {
             // Navigate to the read courses page
-            contentFrame.Navigate(new ReadingCoursesPage());
+            contentFrame.Navigate(new ReadingCoursesPage(ProfileUser));
         }
         private void sideBarHelp_Click(object sender, RoutedEventArgs e)
         {

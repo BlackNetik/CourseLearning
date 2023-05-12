@@ -1,5 +1,6 @@
 ﻿using CourseLearning.Classes;
 using Microsoft.Win32;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,12 +31,20 @@ namespace CourseLearning.Pages
         List<PageObject> pageObjects = new List<PageObject>();
         int iterator = 0;
 
-        public ReadingCoursesPage()
+        //Объект пользователя
+        User CurentUser = null;
+
+        //Строка для подключения к БД
+        string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
+
+        public ReadingCoursesPage(User user)
         {
             InitializeComponent();
 
             //Скрытые элементов отображения страницы
             PageReadingLayout.Visibility = Visibility.Collapsed;
+
+            CurentUser= user;
         }
 
         private void NextPageReadingCoursesButton_Click(object sender, RoutedEventArgs e)
@@ -53,6 +62,10 @@ namespace CourseLearning.Pages
                 //Переход по итератору на новую страницу
                 iterator++;
                 FillPageObjectsReading(pageObjects, iterator);
+
+
+                //Сохранение прогресса
+                AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header, iterator, pageObjects.Count);
 
                 //Проверка на заполненность значений в тесте и наличие вопроса
                 CheckStandartQuestionReading(pageObjects[iterator]);
@@ -97,6 +110,9 @@ namespace CourseLearning.Pages
 
                 CheckStandartQuestionReading(pageObjects[iterator]);
                 CheckTestPageReading(pageObjects[iterator]);
+
+                //Сохранение прогресса
+                AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header,iterator,pageObjects.Count);
             }
 
 
@@ -185,6 +201,15 @@ namespace CourseLearning.Pages
             {
                 MessageBox.Show($"Дан неверный ответ на вопрос. Попробуй ещё раз");
             }
+            else
+            {
+                //Сохранение прогресса
+                AddOrUpdateCourseProgress(CurentUser.Id, pageObjects[0].header, iterator, pageObjects.Count);
+
+                //переход в профиль
+                NavigationService.Navigate(new ProfilePage(CurentUser));
+                //contentFrame.Navigate(new ProfilePage(ProfileUser));
+            }
         }
 
         //Функция, проверяющая ответ теста на правильность
@@ -210,5 +235,42 @@ namespace CourseLearning.Pages
         {
             return StandartAnswerReading.Text == pObject.correct_answer.ToString();
         }
+
+        //Функция, сохраняющая прогресс прохождения курса в базе данных
+        public void AddOrUpdateCourseProgress(int userId, string courseName, int currentPage, int totalPages)
+        {
+            var progress = (int)Math.Round((double)currentPage / totalPages * 100);
+
+            using (var connection = new NpgsqlConnection(ConnectionToBD))
+            {
+                connection.Open();
+
+                using (var command = new NpgsqlCommand())
+                {
+                    command.Connection = connection;
+                    command.CommandText = "SELECT COUNT(*) FROM courseprogress WHERE id_user = @userId AND course_name = @courseName";
+                    command.Parameters.AddWithValue("userId", userId);
+                    command.Parameters.AddWithValue("courseName", courseName);
+
+                    var count = (long)command.ExecuteScalar();
+
+                    if (count == 0)
+                    {
+                        command.CommandText = "INSERT INTO courseprogress (id_user, course_name, progress, status_course) VALUES (@userId, @courseName, @progress, @status)";
+                        command.Parameters.AddWithValue("progress", progress);
+                        command.Parameters.AddWithValue("status", progress == 100 ? "Пройдено" : "Прохожу");
+                    }
+                    else
+                    {
+                        command.CommandText = "UPDATE courseprogress SET progress = @progress, status_course = @status WHERE id_user = @userId AND course_name = @courseName";
+                        command.Parameters.AddWithValue("progress", progress);
+                        command.Parameters.AddWithValue("status", progress == 100 ? "Пройдено" : "Прохожу");
+                    }
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }
