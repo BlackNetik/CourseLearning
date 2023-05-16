@@ -104,7 +104,7 @@ namespace CourseLearning
             mainWindow.Show();
         }
 
-        private bool checkUsernameExists(string username)
+        private bool checkUsernameExists(string username) //Исправить
         {
             if (username == "")
             {
@@ -121,7 +121,9 @@ namespace CourseLearning
             cmd.Parameters.AddWithValue("username", username);
 
             // execute command and get count of users with the given username
-            int count = (int)cmd.ExecuteScalar();
+            //int count = (int)cmd.ExecuteScalar();
+            object result = cmd.ExecuteScalar();
+            int count = Convert.ToInt32(result);
 
             //Если пользователь с таким username уже существует, возвращаем true, иначе - false
             return count > 0;
