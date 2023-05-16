@@ -122,6 +122,11 @@ namespace CourseLearning.Pages
 
         private void NextPageCreating_Click(object sender, RoutedEventArgs e)
         {
+            if (CheckHeaderAndText())
+            {
+                return;
+            }
+
             //Добавление объекта в список объектов
             if(actualIterator > pageObjects.Count)
             {
@@ -149,7 +154,12 @@ namespace CourseLearning.Pages
 
         private void PreviousPageCreating_Click(object sender, RoutedEventArgs e)
         {
-            if(actualIterator == 2) PreviousPageCreating.Visibility = Visibility.Collapsed;
+            if (CheckHeaderAndText())
+            {
+                return;
+            }
+
+            if (actualIterator == 2) PreviousPageCreating.Visibility = Visibility.Collapsed;
 
             //Добавление объекта в список объектов
             if (actualIterator > pageObjects.Count)
@@ -211,6 +221,12 @@ namespace CourseLearning.Pages
             CorrectAnswer.SelectedIndex = 0;
             RegularQuestion.Text = "";
             CorrectAnswerText.Text = "";
+        }
+
+        //Проверка, пустой ли заголовок и текст страницы
+        private bool CheckHeaderAndText()
+        {
+            return PageHeader.Text == "" || PageText.Text == "";
         }
 
         //Функция, которая добавляет курс в базу данных
