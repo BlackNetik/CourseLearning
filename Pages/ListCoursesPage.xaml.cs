@@ -39,8 +39,9 @@ namespace CourseLearning.Pages
             // Получаем текст из поля поиска
             string searchText = searchTextBox.Text;
 
-            // Фильтруем список курсов по названию, содержащему searchText
-            List<Course> filteredCourses = courses.Where(c => c.Name.Contains(searchText)).ToList();
+            // Фильтруем список курсов по названию, содержащему searchText (без учета регистра)
+            List<Course> filteredCourses = courses.Where(c => c.Name.IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0).ToList();
+
 
             // Устанавливаем источник данных для DataGrid
             coursesDataGrid.ItemsSource = filteredCourses;
