@@ -99,7 +99,7 @@ namespace CourseLearning
         //Функция, перенапрявляющяя на окно авторизации после нажатия на отмену
         public void cancelButton_Click(object sender, RoutedEventArgs e)
         {
-            LoginWindow mainWindow= new LoginWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
+            LoginWindow mainWindow = new LoginWindow() { WindowStartupLocation = WindowStartupLocation.CenterScreen };
             this.Close();
             mainWindow.Show();
         }
@@ -127,6 +127,21 @@ namespace CourseLearning
 
             //Если пользователь с таким username уже существует, возвращаем true, иначе - false
             return count > 0;
+
+            ////Ошибка: Не проверяется, что значение, возвращаемое из запроса, не является null. В этом случае при попытке преобразования в int будет выброшено исключение. Реш
+            //ение: добавить проверку на null. 
+            /*
+            object result = cmd.ExecuteScalar();
+            if (result != null)
+            {
+                int count = Convert.ToInt32(result);
+                return count > 0;
+            }
+            else
+            {
+                return false;
+            }
+            */
         }
 
     }
