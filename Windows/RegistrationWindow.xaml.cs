@@ -23,6 +23,9 @@ namespace CourseLearning
     {
         public User user = new User();
 
+        //Строка для подключения к БД
+        string ConnectionToBD = "Server=localhost; port=5432; user id=postgres; password=password; database=courselearning;";
+
         public RegistrationWindow()
         {
             InitializeComponent();
@@ -47,20 +50,20 @@ namespace CourseLearning
 
             //Проверка значений
             if (!checkPassword(passwordUserReg.Text.ToString(), correctPasswordUserReg.Text.ToString()))
-            {
-                MessageBox.Show("Пароли не совпадают или не записаны");
-                passwordUserReg.Text = "";
-                correctPasswordUserReg.Text = "";
-                return;
-            }
-            //Проверка, не заняти ли кем-то по логин
-            else if (!checkUsernameExists(user.Username))
-            {
-                MessageBox.Show("Такой логин уже занят");
-                return;
-            }
+                {
+                    MessageBox.Show("Пароли не совпадают или не записаны");
+                    passwordUserReg.Text = "";
+                    correctPasswordUserReg.Text = "";
+                    return;
+                }
+                //Проверка, не заняти ли кем-то по логин
+            else if (checkUsernameExists(user.Username) == true)
+                {
+                    MessageBox.Show("Такой логин уже занят");
+                    return;
+                }
             else
-            {
+                {
                 //Отправка запроса на добавление пользователя в базу данных
                 var cmd = new NpgsqlCommand();
                 cmd.Connection = conn;
@@ -76,7 +79,8 @@ namespace CourseLearning
                 //Сообщение об успешном добавлении и очистка полей
                 MessageBox.Show("Пользователь успешно добавлен!");
                 clearAll();
-            }
+                }
+            
         }
 
         //Функция очистки полей
@@ -111,37 +115,32 @@ namespace CourseLearning
                 return false;
             }
             //Подключение к базе данных
-            var conn = LoginWindow.GetConnection();
-            conn.Open();
-
-            //Отправка запроса на поиск пользователя с заданным username
-            var cmd = new NpgsqlCommand();
-            cmd.Connection = conn;
-            cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE username = @username";
-            cmd.Parameters.AddWithValue("username", username);
-
-            // execute command and get count of users with the given username
-            //int count = (int)cmd.ExecuteScalar();
-            object result = cmd.ExecuteScalar();
-            int count = Convert.ToInt32(result);
-
-            //Если пользователь с таким username уже существует, возвращаем true, иначе - false
-            return count > 0;
-
-            ////Ошибка: Не проверяется, что значение, возвращаемое из запроса, не является null. В этом случае при попытке преобразования в int будет выброшено исключение. Реш
-            //ение: добавить проверку на null. 
-            /*
-            object result = cmd.ExecuteScalar();
-            if (result != null)
+            using (var connection = new NpgsqlConnection(ConnectionToBD))
             {
-                int count = Convert.ToInt32(result);
-                return count > 0;
+                connection.Open();
+
+               
+                using (var cmd = new NpgsqlCommand())
+                {
+                    cmd.Connection = connection;
+                    cmd.CommandText = "SELECT COUNT(*) FROM Users WHERE username = @username";
+                    cmd.Parameters.AddWithValue("username", username);
+
+                    // execute command and get count of users with the given username
+                    //int count = (int)cmd.ExecuteScalar();
+                    object result = cmd.ExecuteScalar();
+                    if (result != null)
+                    {
+                        int count = Convert.ToInt32(result);
+                        return count > 0;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+
             }
-            else
-            {
-                return false;
-            }
-            */
         }
 
     }
