@@ -21,6 +21,7 @@ using System.Text.Unicode;
 using Microsoft.Win32;
 using CourseLearning.Pages;
 using System.Data.SqlClient;
+using Npgsql;
 
 namespace CourseLearning.Pages
 {
@@ -115,7 +116,7 @@ namespace CourseLearning.Pages
             File.WriteAllText(filePath, newJsonString);
 
             //Добавление курса в базу данных
-            AddOrUpdateCourse(CurrentUser.Id,CurrentUser.FirstName + " " + CurrentUser.LastName,"");
+            AddOrUpdateCourse(CurrentUser.Id, pageObjects[0].header,"");
 
             MessageBox.Show("Курс сохранен!");
         }
@@ -232,33 +233,33 @@ namespace CourseLearning.Pages
         //Функция, которая добавляет курс в базу данных
         public void AddOrUpdateCourse(int userId, string name, string url)
         {
-            using (SqlConnection connection = new SqlConnection(ConnectionToBD))
+            using (var connection = new NpgsqlConnection(ConnectionToBD))
             {
                 connection.Open();
 
-                SqlCommand command = new SqlCommand("SELECT COUNT(*) FROM Courses WHERE id_user = @userId AND name = @name", connection);
-                command.Parameters.AddWithValue("@userId", userId);
-                command.Parameters.AddWithValue("@name", name);
-
-                int count = (int)command.ExecuteScalar();
-
-                if (count == 0)
+                using (var cmd = new NpgsqlCommand())
                 {
-                    command = new SqlCommand("INSERT INTO Courses (id_user, name, url) VALUES (@userId, @name, @url)", connection);
-                    command.Parameters.AddWithValue("@userId", userId);
-                    command.Parameters.AddWithValue("@name", name);
-                    command.Parameters.AddWithValue("@url", url);
+                    cmd.Connection = connection;
+                    cmd.CommandText = "SELECT COUNT(*) FROM Courses WHERE id_user = @userId AND name = @name";
+                    cmd.Parameters.AddWithValue("userId", userId);
+                    cmd.Parameters.AddWithValue("name", name);
 
-                    command.ExecuteNonQuery();
-                }
-                else
-                {
-                    command = new SqlCommand("UPDATE Courses SET url = @url WHERE id_user = @userId AND name = @name", connection);
-                    command.Parameters.AddWithValue("@userId", userId);
-                    command.Parameters.AddWithValue("@name", name);
-                    command.Parameters.AddWithValue("@url", url);
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
 
-                    command.ExecuteNonQuery();
+                    if (count == 0)
+                    {
+                        cmd.CommandText = "INSERT INTO Courses (id_user, name, url) VALUES (@userId, @name, @url)";
+                        cmd.Parameters.AddWithValue("url", url);
+
+                        cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        cmd.CommandText = "UPDATE Courses SET url = @url WHERE id_user = @userId AND name = @name";
+                        cmd.Parameters.AddWithValue("url", url);
+
+                        cmd.ExecuteNonQuery();
+                    }
                 }
             }
         }
