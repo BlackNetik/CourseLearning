@@ -30,10 +30,6 @@ namespace CourseLearning
         {
             InitializeComponent();
 
-            //Заполняем данные чтобы каждый раз не вводить по новой. После завершения работы не забыть удалить
-            loginTextBox.Text = "admin";
-            passwordPasswordBox.Password = "admin";
-
             //Подключение к базе данных
             var conn = GetConnection();
             var cmd = new NpgsqlCommand();
