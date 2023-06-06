@@ -96,7 +96,7 @@
                 </Button>
             </Grid>
 
-            <Grid Margin="0 320 0 0">
+            <Grid Margin="0 250 0 0">
                 <Ellipse HorizontalAlignment="Left" Height="35" Margin="10,0,0,0" VerticalAlignment="Center" Width="35">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="/Images/icons8-logout-48.png" Stretch="Fill"/>
